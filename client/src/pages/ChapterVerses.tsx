@@ -9,9 +9,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const ChapterVerses = () => {
   const params = useParams<{ bookName: string; chapterNum: string }>();
-  const { getChapterVerses, copyVerse, fontSize, isLoading } = useBible();
+  const { getChapterVerses, copyVerse, fontSize, isLoading, getTamilBookName } = useBible();
   
   const bookName = decodeURIComponent(params.bookName);
+  const tamilBookName = getTamilBookName(bookName);
   const chapterNum = parseInt(params.chapterNum, 10);
   
   const verses = getChapterVerses(bookName, chapterNum);
@@ -19,7 +20,7 @@ const ChapterVerses = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen pb-24">
-        <Header title={`${bookName} ${chapterNum}`} />
+        <Header title={`${tamilBookName} ${chapterNum}`} />
         <main className="container mx-auto px-4 py-6">
           <Card>
             <CardContent className="pt-6 space-y-4">
@@ -39,7 +40,7 @@ const ChapterVerses = () => {
   
   return (
     <div className="min-h-screen pb-24">
-      <Header title={`${bookName} ${chapterNum}`} />
+      <Header title={`${tamilBookName} ${chapterNum}`} />
       
       <main className="container mx-auto px-4 py-6">
         <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm">

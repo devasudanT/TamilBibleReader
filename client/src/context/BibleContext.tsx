@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, ReactNode } from 'react';
 import { BibleVerse, BookData, SearchResult } from '@/types/bible';
 import { bibleCategories } from '@/data/categories';
 import { apiRequest } from '@/lib/queryClient';
+import { tamilBookNames } from '../data/tamilBooks';
 
 interface BibleContextType {
   bibleData: BibleVerse[];
@@ -20,6 +21,7 @@ interface BibleContextType {
   getBookChapterCount: (bookName: string) => number;
   getChapterVerses: (bookName: string, chapter: number) => BibleVerse[];
   highlightText: (text: string, query: string) => string;
+  getTamilBookName: (englishName: string) => string;
 }
 
 export const BibleContext = createContext<BibleContextType | undefined>(undefined);
@@ -130,6 +132,11 @@ export const BibleProvider = ({ children }: { children: ReactNode }) => {
     setSearchResults(results);
   };
 
+  // Get Tamil book name
+  const getTamilBookName = (englishName: string) => {
+    return tamilBookNames[englishName] || englishName;
+  };
+
   const value = {
     bibleData,
     booksList,
@@ -146,7 +153,8 @@ export const BibleProvider = ({ children }: { children: ReactNode }) => {
     performSearch,
     getBookChapterCount,
     getChapterVerses,
-    highlightText
+    highlightText,
+    getTamilBookName
   };
 
   return <BibleContext.Provider value={value}>{children}</BibleContext.Provider>;
