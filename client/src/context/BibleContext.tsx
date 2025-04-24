@@ -17,6 +17,7 @@ interface BibleContextType {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   searchResults: SearchResult[];
+  setSearchResults: React.Dispatch<React.SetStateAction<SearchResult[]>>;
   performSearch: () => void;
   getBookChapterCount: (bookName: string) => number;
   getChapterVerses: (bookName: string, chapter: number) => BibleVerse[];
@@ -151,6 +152,7 @@ export const BibleProvider = ({ children }: { children: ReactNode }) => {
     searchQuery,
     setSearchQuery,
     searchResults,
+    setSearchResults,
     performSearch,
     getBookChapterCount,
     getChapterVerses,

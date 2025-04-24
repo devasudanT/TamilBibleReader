@@ -43,39 +43,41 @@ const ChapterVerses = () => {
     <div className="min-h-screen pb-24">
       <Header title="Tamil KJV" tagline="foodfornewcreature.com" />
       
-      <main className="container mx-auto px-4 py-6">
+      <main className="w-full py-6 px-2">
         <h2 className="text-xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
           {tamilBookName} {chapterNum}
         </h2>
         
-        <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm">
-          <CardContent className="pt-6 space-y-4">
-            {verses.map((verse) => (
-              <div key={verse.verse} className="group relative">
+        <div className="space-y-3">
+          {verses.map((verse) => (
+            <Card key={verse.verse} className="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <CardContent className="p-3">
                 <div className="flex">
-                  <span className="text-primary-600 dark:text-primary-400 font-semibold w-10 text-right pr-3">
+                  <span className="text-primary-600 dark:text-primary-400 font-semibold min-w-8 text-right pr-3 pt-1">
                     {verse.verse}
                   </span>
-                  <div 
-                    style={{ fontSize: `${fontSize}px` }} 
-                    className="flex-1"
-                  >
-                    {verse.text}
+                  <div className="relative flex-1">
+                    <div 
+                      style={{ fontSize: `${fontSize}px` }} 
+                      className="pr-8"
+                    >
+                      {verse.text}
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => copyVerse(verse)}
+                      className="absolute right-0 top-0 opacity-0 group-hover:opacity-100 transition-opacity p-1 text-slate-400 hover:text-primary dark:hover:text-primary"
+                    >
+                      <Copy className="h-4 w-4" />
+                      <span className="sr-only">Copy verse</span>
+                    </Button>
                   </div>
                 </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => copyVerse(verse)}
-                  className="absolute right-0 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity p-2 text-slate-400 hover:text-primary dark:hover:text-primary"
-                >
-                  <Copy className="h-4 w-4" />
-                  <span className="sr-only">Copy verse</span>
-                </Button>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </main>
       
       <FooterNav />

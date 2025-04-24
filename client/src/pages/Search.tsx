@@ -14,6 +14,7 @@ const Search = () => {
     searchQuery, 
     setSearchQuery, 
     searchResults, 
+    setSearchResults,
     performSearch, 
     fontSize, 
     copyVerse,
@@ -41,6 +42,7 @@ const Search = () => {
 
   const clearSearch = () => {
     setSearchQuery('');
+    setSearchResults([]);
   };
 
   const handleCopyVerse = (result: any) => {
@@ -60,7 +62,7 @@ const Search = () => {
     <div className="min-h-screen pb-24">
       <Header title="Tamil KJV" tagline="foodfornewcreature.com" />
       
-      <main className="container mx-auto px-4 py-6">
+      <main className="w-full py-6 px-2">
         <h2 className="text-xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
           Search
         </h2>
@@ -102,29 +104,31 @@ const Search = () => {
               {searchResults.length} முடிவுகள் "{searchQuery}"
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-3">
               {searchResults.map((result, index) => (
-                <Card key={index} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm group">
-                  <CardContent className="p-4">
-                    <div className="flex justify-between items-start">
-                      <h3 className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
-                        {getTamilBookName(result.book_name)} {result.chapter}:{result.verse}
-                      </h3>
+                <Card key={index} className="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                  <CardContent className="p-3">
+                    <div className="flex items-start mb-1">
+                      <div className="flex-1">
+                        <h3 className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
+                          {getTamilBookName(result.book_name)} {result.chapter}:{result.verse}
+                        </h3>
+                      </div>
                       <Button
                         variant="ghost"
                         size="icon"
                         onClick={() => handleCopyVerse(result)}
-                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 text-slate-400 hover:text-primary dark:hover:text-primary"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 ml-2 text-slate-400 hover:text-primary dark:hover:text-primary"
                       >
                         <Copy className="h-4 w-4" />
                         <span className="sr-only">Copy verse</span>
                       </Button>
                     </div>
-                    <p 
+                    <div 
                       style={{ fontSize: `${fontSize}px` }} 
-                      className="mt-2 text-slate-700 dark:text-slate-300"
+                      className="text-slate-700 dark:text-slate-300"
                       dangerouslySetInnerHTML={{ __html: result.highlighted }}
-                    ></p>
+                    ></div>
                   </CardContent>
                 </Card>
               ))}
