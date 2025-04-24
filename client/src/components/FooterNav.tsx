@@ -2,12 +2,10 @@ import { useLocation } from "wouter";
 import { Home, ArrowLeft, Search, Info, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 import { useBible } from "@/hooks/useBible";
 
 const FooterNav = () => {
   const [location, navigate] = useLocation();
-  const [showSearchBar, setShowSearchBar] = useState(false);
   const { searchQuery, setSearchQuery } = useBible();
   
   const goBack = () => {
@@ -23,14 +21,6 @@ const FooterNav = () => {
 
   const goHome = () => {
     navigate('/');
-  };
-
-  const goToSearch = () => {
-    if (searchQuery.trim()) {
-      navigate('/search');
-    } else {
-      setShowSearchBar(!showSearchBar);
-    }
   };
   
   const goToAbout = () => {
@@ -50,31 +40,8 @@ const FooterNav = () => {
 
   return (
     <footer className="fixed bottom-0 w-full bg-white dark:bg-slate-800 shadow-lg border-t border-slate-200 dark:border-slate-700">
-      {showSearchBar && (
-        <div className="container mx-auto px-4 py-2 border-b border-slate-200 dark:border-slate-700">
-          <div className="relative">
-            <Input
-              type="text"
-              placeholder="Search verse"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="pl-3 pr-10 py-2 rounded-lg"
-              autoFocus
-            />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setShowSearchBar(false)}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      )}
       <div className="container mx-auto px-4 py-3">
-        <div className="flex justify-around items-center">
+        <div className="flex justify-between items-center">
           <Button 
             variant="ghost" 
             size="icon"
@@ -96,15 +63,29 @@ const FooterNav = () => {
             <span className="sr-only">Go home</span>
           </Button>
           
-          <Button 
-            variant="ghost" 
-            size="icon"
-            onClick={goToSearch}
-            className="p-3 text-primary dark:text-primary rounded-full hover:bg-slate-100 dark:hover:bg-slate-700"
-          >
-            <Search className="h-6 w-6" />
-            <span className="sr-only">Search</span>
-          </Button>
+          <div className="relative flex-1 mx-2">
+            <div className="flex items-center bg-slate-100 dark:bg-slate-700 rounded-full">
+              <Search className="h-5 w-5 ml-3 text-slate-500 dark:text-slate-400" />
+              <Input
+                type="text"
+                placeholder="Search verse"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+              />
+              {searchQuery && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setSearchQuery('')}
+                  className="p-1 mr-1"
+                >
+                  <X className="h-4 w-4 text-slate-500 dark:text-slate-400" />
+                </Button>
+              )}
+            </div>
+          </div>
           
           <Button 
             variant="ghost" 

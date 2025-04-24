@@ -85,7 +85,8 @@ export const BibleProvider = ({ children }: { children: ReactNode }) => {
 
   // Copy verse to clipboard
   const copyVerse = (verse: BibleVerse) => {
-    const text = `${verse.book_name} ${verse.chapter}:${verse.verse}\n${verse.text}`;
+    const tamilBookName = getTamilBookName(verse.book_name);
+    const text = `${tamilBookName} ${verse.chapter}:${verse.verse}\n${verse.text}`;
     navigator.clipboard.writeText(text);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
