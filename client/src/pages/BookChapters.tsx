@@ -20,8 +20,9 @@ const BookChapters = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen pb-24">
-        <Header title={tamilBookName} />
+        <Header title="Tamil KJV" tagline="foodfornewcreature.com" />
         <main className="container mx-auto px-4 py-6">
+          <Skeleton className="h-8 w-64 mb-4 mx-auto" />
           <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">
             {Array.from({ length: 10 }).map((_, i) => (
               <Skeleton key={i} className="aspect-square h-16 rounded-lg" />
@@ -35,12 +36,15 @@ const BookChapters = () => {
   
   return (
     <div className="min-h-screen pb-24">
-      <Header title={tamilBookName} />
+      <Header title="Tamil KJV" tagline="foodfornewcreature.com" />
       
       <main className="container mx-auto px-4 py-6">
-        <h2 className="text-lg text-center mb-4 text-slate-600 dark:text-slate-400">
-          அதிகாரம் தேர்வு செய்க
+        <h2 className="text-xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
+          {tamilBookName}
         </h2>
+        <h3 className="text-lg text-center mb-4 text-slate-600 dark:text-slate-400">
+          அதிகாரம் தேர்வு செய்க
+        </h3>
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">
           {Array.from({ length: chapterCount }, (_, i) => i + 1).map((chapter) => (
             <button

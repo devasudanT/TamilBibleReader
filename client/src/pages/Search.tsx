@@ -16,7 +16,8 @@ const Search = () => {
     searchResults, 
     performSearch, 
     fontSize, 
-    copyVerse 
+    copyVerse,
+    getTamilBookName
   } = useBible();
   
   const [location, navigate] = useLocation();
@@ -57,13 +58,17 @@ const Search = () => {
 
   return (
     <div className="min-h-screen pb-24">
-      <Header title="Search Results" />
+      <Header title="Tamil KJV" tagline="foodfornewcreature.com" />
       
       <main className="container mx-auto px-4 py-6">
+        <h2 className="text-xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
+          தேடல்
+        </h2>
+        
         <div className="relative mb-6">
           <Input 
             type="text"
-            placeholder="Search for verses..."
+            placeholder="வசனங்களைத் தேட..."
             className="w-full px-4 py-3 rounded-lg border dark:border-slate-600 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary pr-20"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -93,8 +98,8 @@ const Search = () => {
 
         {searchResults.length > 0 ? (
           <>
-            <div className="text-slate-600 dark:text-slate-400 mb-4">
-              {searchResults.length} results found for "{searchQuery}"
+            <div className="text-slate-600 dark:text-slate-400 mb-4 text-center">
+              {searchResults.length} முடிவுகள் "{searchQuery}"
             </div>
             
             <div className="space-y-4">
@@ -102,8 +107,8 @@ const Search = () => {
                 <Card key={index} className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm group">
                   <CardContent className="p-4">
                     <div className="flex justify-between items-start">
-                      <h3 className="font-semibold text-primary-700 dark:text-primary-300">
-                        {result.book_name} {result.chapter}:{result.verse}
+                      <h3 className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
+                        {getTamilBookName(result.book_name)} {result.chapter}:{result.verse}
                       </h3>
                       <Button
                         variant="ghost"
@@ -132,7 +137,7 @@ const Search = () => {
                 <SearchIcon className="h-12 w-12 text-slate-300 dark:text-slate-600" />
               </div>
               <p className="mt-3 text-slate-600 dark:text-slate-400">
-                No results found for "{searchQuery}"
+                "{searchQuery}" க்கு பொருத்தமான முடிவுகள் இல்லை
               </p>
             </div>
           ) : (
@@ -141,7 +146,7 @@ const Search = () => {
                 <SearchIcon className="h-12 w-12 text-slate-300 dark:text-slate-600" />
               </div>
               <p className="mt-3 text-slate-600 dark:text-slate-400">
-                Enter a search term to find verses
+                வசனங்களைக் கண்டறிய தேடல் சொற்றொடரை உள்ளிடவும்
               </p>
             </div>
           )

@@ -20,8 +20,9 @@ const ChapterVerses = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen pb-24">
-        <Header title={`${tamilBookName} ${chapterNum}`} />
+        <Header title="Tamil KJV" tagline="foodfornewcreature.com" />
         <main className="container mx-auto px-4 py-6">
+          <Skeleton className="h-8 w-64 mb-4 mx-auto" />
           <Card>
             <CardContent className="pt-6 space-y-4">
               {Array.from({ length: 10 }).map((_, i) => (
@@ -40,9 +41,13 @@ const ChapterVerses = () => {
   
   return (
     <div className="min-h-screen pb-24">
-      <Header title={`${tamilBookName} ${chapterNum}`} />
+      <Header title="Tamil KJV" tagline="foodfornewcreature.com" />
       
       <main className="container mx-auto px-4 py-6">
+        <h2 className="text-xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
+          {tamilBookName} {chapterNum}
+        </h2>
+        
         <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm">
           <CardContent className="pt-6 space-y-4">
             {verses.map((verse) => (

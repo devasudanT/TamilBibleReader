@@ -2,6 +2,7 @@ import { useLocation } from "wouter";
 import { useBible } from "@/hooks/useBible";
 import Header from "@/components/Header";
 import FooterNav from "@/components/FooterNav";
+import { canonicalOrder } from "@/data/canonicalOrder";
 
 const Home = () => {
   const [location, navigate] = useLocation();
@@ -11,20 +12,18 @@ const Home = () => {
     navigate(`/book/${encodeURIComponent(bookName)}`);
   };
 
-  // Sort books alphabetically by Tamil name
-  const sortedBooks = [...booksList].sort((a, b) => {
-    const tamilA = getTamilBookName(a.bookName);
-    const tamilB = getTamilBookName(b.bookName);
-    return tamilA.localeCompare(tamilB);
-  });
+  // Arrange books in canonical order
+  const orderedBooks = canonicalOrder
+    .map(bookName => booksList.find(book => book.bookName === bookName))
+    .filter(book => book !== undefined) as typeof booksList;
 
   return (
     <div className="min-h-screen pb-24">
-      <Header title="Tamil KJV" />
+      <Header title="Tamil KJV" tagline="foodfornewcreature.com" />
       
       <main className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {sortedBooks.map((book) => (
+          {orderedBooks.map((book) => (
             <button
               key={book.bookName}
               onClick={() => handleSelectBook(book.bookName)}
