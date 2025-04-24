@@ -62,7 +62,7 @@ const Search = () => {
       
       <main className="container mx-auto px-4 py-6">
         <h2 className="text-xl font-semibold text-center mb-4 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
-          தேடல்
+          Search
         </h2>
         
         <div className="relative mb-6">

@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import BookChapters from "@/pages/BookChapters";
 import ChapterVerses from "@/pages/ChapterVerses";
 import Search from "@/pages/Search";
+import About from "@/pages/About";
 import { queryClient } from "./lib/queryClient";
 import { BibleProvider } from "./context/BibleContext";
 import { useEffect, useState } from "react";
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/book/:bookName" component={BookChapters} />
       <Route path="/book/:bookName/chapter/:chapterNum" component={ChapterVerses} />
       <Route path="/search" component={Search} />
+      <Route path="/about" component={About} />
       <Route component={NotFound} />
     </Switch>
   );

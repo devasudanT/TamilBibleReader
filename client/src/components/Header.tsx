@@ -16,7 +16,7 @@ const Header = ({ title, tagline }: HeaderProps) => {
     <header className="sticky top-0 z-10 bg-white dark:bg-slate-800 shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex flex-col">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
+          <h1 className="text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-transparent bg-clip-text">
             {title}
           </h1>
           {tagline && (
